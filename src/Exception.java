@@ -4,7 +4,7 @@ import java.text.*;
 import java.math.*;
 import java.util.regex.*;
 
-public class Solution {
+class Solution1 {
 
     public static boolean flag = false;
     static Scanner sc = new Scanner(System.in);
