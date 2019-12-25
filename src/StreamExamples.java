@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
@@ -16,9 +17,16 @@ public class StreamExamples {
 //        System.out.println();
 
         //Sorted Method
-        Stream.of("Ava", "Aneri", "Alberto")
+//        Stream.of("Ava", "Aneri", "Alberto")
+//                .sorted()
+//                .findFirst()
+//                .ifPresent(System.out::println);
+
+        //Stream, Filter, Sort, Print
+        String[] names = {"Al", "Ankit", "Pankaj", "Amanda", "Sarika"};
+        Arrays.stream(names)
+                .filter(x -> x.startsWith("S"))
                 .sorted()
-                .findFirst()
-                .ifPresent(System.out::println);
+                .forEach(System.out::println);
     }
 }
