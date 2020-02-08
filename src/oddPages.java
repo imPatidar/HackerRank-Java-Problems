@@ -1,25 +1,68 @@
-import java.io.*;
-import java.util.*;
-import java.text.*;
-import java.math.*;
-import java.util.regex.*;
-import java.lang.String;
-import java.util.stream.Collectors;
+import java.util.Scanner;
 
-class Document1{
+class solution6{
+
+    public static void main(String[] args) {
+        document[] d = new document[4];
+        Scanner sc = new Scanner(System.in);
+        for (int i = 0; i < d.length ; i++) {
+
+            int id= sc.nextInt();
+            sc.nextLine();
+            String title= sc.nextLine();
+            String folderName = sc.nextLine();
+            int pages = sc.nextInt();
+            d[i] = new document(id, title, folderName, pages);
+        }
+
+        document[] result = docsWithOddPages(d);
+        for (int i = 0; i < result.length ; i++) {
+            if(result[i]!=null){
+                System.out.println(result[i].getId()+" "+result[i].getTitle()+" "+result[i].getFolderName()+" "+result[i].getPages());
+
+            }
+        }
+
+    }
+    public static document[] docsWithOddPages(document[] d){
+
+        document[] temp = new document[4];
+        int j=0;
+
+        //Separate Odd Pages
+        for (int i = 0; i < d.length; i++) {
+            if(d[i].getPages()%2 !=0){
+                temp[j++]=d[i];
+            }
+
+        }
+
+        //Sort Odd Pages
+        for (int i = 0; i <j-1; i++) {
+            for (int k = 0; k <j-i-1 ; k++) {
+                if(temp[k].getId()<temp[k+1].getId()){
+                    document ds=temp[k];
+                    temp[k] = temp[k+1];
+                    temp[k+1] = ds;
+                }
+            }
+        }
+
+        return temp;
+    }
+}
+
+class document{
     int id;
     String title;
     String folderName;
     int pages;
 
-
-    @Override
-    public String toString() {
-        return
-                id +
-                " " + title +
-                " " + folderName +
-                " " + pages;
+    public document(int id, String title, String folderName, int pages) {
+        this.id = id;
+        this.title = title;
+        this.folderName = folderName;
+        this.pages = pages;
     }
 
     public int getId() {
@@ -54,29 +97,3 @@ class Document1{
         this.pages = pages;
     }
 }
-
-public class oddPages {
-
-    public static void main(String args[] ) throws Exception {
-        /* Enter your code here. Read input from STDIN. Print output to STDOUT */
-        Scanner sc = new Scanner(System.in);
-        ArrayList<Document1> ar = new ArrayList<Document1>();
-
-
-
-        while(sc.hasNextLine()){
-            Document1 d1= new Document1();
-            d1.setId(sc.nextInt());
-            d1.setTitle(sc.next());
-            d1.setFolderName(sc.next());
-            d1.setPages(sc.nextInt());
-            ar.add(d1);
-
-        }
-
-        ar.stream().filter(document1 -> document1.getPages() %2 != 0).forEach(document1 -> System.out.println(document1.toString()));
-
-
-        }
-
-    }
